@@ -1,10 +1,10 @@
 import React from 'react'
-import './App.css'
+import { AppRouters } from './Routes/appRouters'
 
 function App() {
   return (
     <div className='App'>
-      <h1>hola</h1>
+      <AppRouters />
     </div>
   )
 }
