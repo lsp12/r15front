@@ -58,6 +58,18 @@ export const NavBar = () => {
                 textTransform: 'capitalize !important',
               }}
               component={Link}
+              to='/quest'
+            >
+              Administrador de preguntas
+            </Button>
+            <Button
+              sx={{
+                my: 2,
+                color: 'white',
+                display: 'block',
+                textTransform: 'capitalize !important',
+              }}
+              component={Link}
               to='/login'
             >
               Iniciar Sesion
