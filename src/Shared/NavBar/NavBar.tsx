@@ -70,6 +70,18 @@ export const NavBar = () => {
                 textTransform: 'capitalize !important',
               }}
               component={Link}
+              to='/openmap'
+            >
+              Ver Geolocalizaciones
+            </Button>
+            <Button
+              sx={{
+                my: 2,
+                color: 'white',
+                display: 'block',
+                textTransform: 'capitalize !important',
+              }}
+              component={Link}
               to='/login'
             >
               Iniciar Sesion

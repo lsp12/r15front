@@ -37,10 +37,12 @@ export const FormQuests = () => {
                     onKeyDown={(e) => {
                       if (e.key === 'Enter') {
                         e.preventDefault()
-                        setOptions([...options, getValues('options')])
-                        reset({
-                          options: '',
-                        })
+                        if (getValues().options !== '') {
+                          setOptions([...options, getValues('options')])
+                          reset({
+                            options: '',
+                          })
+                        }
                       }
                     }}
                     InputProps={{
@@ -48,10 +50,12 @@ export const FormQuests = () => {
                         <InputAdornment position='end'>
                           <IconButton
                             onClick={() => {
-                              setOptions([...options, getValues('options')])
-                              reset({
-                                options: '',
-                              })
+                              if (getValues().options !== '') {
+                                setOptions([...options, getValues('options')])
+                                reset({
+                                  options: '',
+                                })
+                              }
                             }}
                           >
                             <Add />
