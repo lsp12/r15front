@@ -1,16 +1,15 @@
-import React, { useEffect, useState } from 'react'
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
+import React from 'react'
 import { Grid } from '@mui/material'
 import './styles.css'
-import { IconLocation } from '../components/iconLocation'
-import { LatLngExpression } from 'leaflet'
+import { MapView } from '../components/map'
+import { UserLocation } from '../components/listUser'
+import { MapDiv } from '../components/map/MapDiv'
 
 export const MapOpen = () => {
   document.title = 'Mapa de ubicación de los encuestadores'
-  const [geolocation, setGeolocation] = useState<any>({
-    lat: 0,
-    lng: 0,
-  })
+
+  const [location, setLocation] = React.useState<any>([0, 0])
+
   const apiFake: any[] = [
     {
       name: 'Persona encuestadora 1',
@@ -30,57 +29,14 @@ export const MapOpen = () => {
     },
   ]
 
-  useEffect(() => {
-    navigator.geolocation.getCurrentPosition(
-      (position) => {
-        console.log(position)
-        setGeolocation({
-          lat: position.coords.latitude,
-          lng: position.coords.longitude,
-        })
-      },
-      (error) => {
-        console.log(error)
-      },
-      {
-        enableHighAccuracy: true,
-      },
-    )
-  }, [])
-
-  console.log(geolocation)
-
   return (
     <Grid container>
-      <Grid item xs={12} md={12}>
-        <MapContainer
-          center={[-1.8000869194439506, -79.53050447397867]}
-          zoom={13}
-          scrollWheelZoom={true}
-        >
-          <TileLayer
-            attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-            url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
-          />
-          {apiFake.map((item, index) => (
-            <Marker key={index} position={item.geometry} icon={IconLocation}>
-              <Popup>
-                <span>{item.name}</span>
-              </Popup>
-            </Marker>
-          ))}
-          <Marker position={geolocation} icon={IconLocation}>
-            <Popup>
-              <span>
-                <h1>Mi ubicación</h1>
-                <p>
-                  {geolocation.lat}, {geolocation.lng}
-                </p>
-              </span>
-            </Popup>
-          </Marker>
-          {/* <Marker position={[-1.8000869194439506, -79.53050447397867]} icon={IconLocation} /> */}
-        </MapContainer>
+      <Grid item xs={12} md={4}>
+        <UserLocation apiFake={apiFake} setLocation={setLocation} />
+      </Grid>
+      <Grid item xs={12} md={8}>
+        {/*  <MapDiv /> */}
+        <MapView location={location} apiFake={apiFake} />
       </Grid>
     </Grid>
   )
